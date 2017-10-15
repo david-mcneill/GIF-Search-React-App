@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import SearchForm from './Components/SearchForm';
 import GifList from './Components/GifList';
+import axios from 'axios';
 
 export default class App extends Component {
 
@@ -13,11 +14,11 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        fetch('http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC')
-            .then(response => response.json())
-            .then(responseData => {
+        // Make a request for a user with a given ID
+        axios.get('http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC')
+            .then(response => {
                 this.setState({
-                    gifs: responseData.data
+                    gifs: response.data.data
                 });
             })
             .catch(error => {
